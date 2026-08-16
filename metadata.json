@@ -1,0 +1,6 @@
+{
+  "name": "Vantage OS",
+  "description": "Uma interface minimalista para scripts de otimização do Windows 11 com perfis, monitoramento e limpeza rápida.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
