@@ -15,6 +15,14 @@
 
 ---
 
+> **🚀 MAJOR UPDATE IN PROGRESS (August 2026) still cooking!!**  
+>  * i will keep studying ways to connect the front end and back end and solve some memory leaks, until all is fixed i will test and send a beta branch to test...
+> * **Next Steps:** finish the interface, connect data to the backend and finalizing the documentation to reflect the new API integrations and workflow automation. The legacy scripts remain functional during this transition phase.
+> * what can you expect from this major update?
+> * - new interface, new features and many more
+> * * (status - working on branch interface-uiux)
+
+---
 ## ✨ What it does
 
 A collection of `.bat` scripts (with inline PowerShell for system ops) designed to make a clean Windows 11 install feel faster, quieter, and more private — **without touching anything that would break your system**.
