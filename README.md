@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🪟 windows-optimizer
+# windows-optimizer
 
 **Post-install Windows 11 optimization scripts — safe, documented, and fully reversible.**
 
@@ -9,33 +9,34 @@
 [![Batch + PowerShell](https://img.shields.io/badge/Batch_%2B_PowerShell-hybrid-5391FE?logo=powershell)](scripts/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-**🌐 Language / Idioma:** &nbsp; [🇺🇸 English](README.md) &nbsp;|&nbsp; [🇧🇷 Português](docs/pt-BR.md)
+** Language / Idioma:** &nbsp; [🇺🇸 English](README.md) &nbsp;|&nbsp; [🇧🇷 Português](docs/pt-BR.md)
 
 </div>
 
 ---
 
-> **🚀 MAJOR UPDATE IN PROGRESS (August 2026) still cooking!!**  
+> ** MAJOR UPDATE IN PROGRESS **  
 >  * i will keep studying ways to connect the front end and back end and solve some memory leaks, until all is fixed i will test and send a beta branch to test...
 > * **Next Steps:** finish the interface, connect data to the backend and finalizing the documentation to reflect the new API integrations and workflow automation. The legacy scripts remain functional during this transition phase.
 > * what can you expect from this major update?
 > * - new interface, new features and many more
-> * * (status - working on branch interface-uiux)
+> * * (status - working on branch interface-ui/ux)
+>   *  after the major update this old version (windows-optimizer will be still available)
 
 ---
-## ✨ What it does
+##  What it does
 
 A collection of `.bat` scripts (with inline PowerShell for system ops) designed to make a clean Windows 11 install feel faster, quieter, and more private — **without touching anything that would break your system**.
 
 Every script is:
-- ✅ **Safe** — targets only non-essential services and policy registry keys
-- ✅ **Reversible** — `10_undo_all.bat` restores Windows defaults
-- ✅ **Transparent** — each change is logged with a timestamp
-- ✅ **Documented** — see [docs/RISKS.md](docs/RISKS.md) for a full breakdown
+-  **Safe** — targets only non-essential services and policy registry keys
+-  **Reversible** — `10_undo_all.bat` restores Windows defaults
+-  **Transparent** — each change is logged with a timestamp
+-  **Documented** — see [docs/RISKS.md](docs/RISKS.md) for a full breakdown
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 > **Requires:** Windows 11, Administrator privileges.
 
@@ -51,7 +52,7 @@ You can also run each script **individually** — they work standalone.
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 win-optimizer/
@@ -80,7 +81,7 @@ win-optimizer/
 
 ---
 
-## 📋 Scripts Reference
+## Scripts Reference ( more will be add)
 
 | Script | Category | Risk | Reversible |
 |--------|----------|------|-----------|
@@ -103,39 +104,39 @@ win-optimizer/
 
 ---
 
-## 🔄 Reverting Changes
+## Reverting Changes
 
 Run `10_undo_all.bat` as Administrator to restore all settings to Windows defaults.
 Alternatively, use the System Restore point created in step 01.
 
 ---
 
-## 📦 What is NOT changed
+## What is NOT changed
 
 To avoid any chance of breaking your system, these are intentionally left alone:
 
-- ❌ No hosts file modifications (see [docs/RISKS.md](docs/RISKS.md) for optional extra steps)
-- ❌ No Windows Defender / Security Center changes
-- ❌ No core Windows Update policy changes
-- ❌ No hardware driver tweaks
-- ❌ No CPU/GPU overclocking
+-  No hosts file modifications (see [docs/RISKS.md](docs/RISKS.md) for optional extra steps)
+-  No Windows Defender / Security Center changes
+-  No core Windows Update policy changes
+-  No hardware driver tweaks
+-  No CPU/GPU overclocking
 
 ---
 
-## 🌐 Português
+## Português
 
 Documentação em PT-BR disponível em [docs/pt-BR.md](docs/pt-BR.md).
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Issues and PRs are welcome! Please read [docs/RISKS.md](docs/RISKS.md) before submitting new tweaks.
 New scripts must follow the `_lib/` conventions (admin check, logger, colors) and must include a corresponding undo step in `10_undo_all.bat`.
 
 ---
 
-## 📄 License
+## License
 
 MIT — see [LICENSE](LICENSE).
 
