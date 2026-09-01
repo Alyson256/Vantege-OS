@@ -1,6 +1,6 @@
 <div align="center">
 
-# windows-optimizer
+# windows-optimizer( new Vantage OS ) 
 
 **Post-install Windows 11 optimization scripts — safe, documented, and fully reversible.**
 
@@ -21,7 +21,6 @@
 > * what can you expect from this major update?
 > * - new interface, new features and many more
 > * * (status - working on branch interface-ui/ux)
->   *  after the major update this old version (windows-optimizer will be still available)
 
 ---
 ##  What it does
