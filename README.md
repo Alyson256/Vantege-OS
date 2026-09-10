@@ -4,13 +4,14 @@
 
 **Author:** **Alyson** · [github.com/Alyson256](https://github.com/Alyson256) 
 **License:** MIT License | Licença MIT  
-**Language:**  [PT-BR](./assets/docs/pt-br.md)  
+**Language:**  [PT-BR](./src/assets/docs/pt-br.md)  
 
 ---
 
-![Vantage OS Dashboard](./assets/dashboard.png)
+![Vantage OS Dashboard](./src/assets/dashboard.png)
 
-## The Vision
+## General
+
 Vantage OS is not just a cleaning script. It is a low-level telemetry and optimization dashboard featuring a next-generation interface, designed to monitor hardware in real-time (CPU, GPU, DPC Latency) and apply surgical optimizations without system overhead.
 
 *Note: The UI/UX foundation and component architecture were accelerated and structured utilizing AI tools. This approach allowed for rapid prototyping, ensuring a premium visual experience while maintaining absolute focus on the core engine's performance and low-level integrations.*

@@ -4,13 +4,16 @@
 
 **Autor:** **Alyson** · [github.com/Alyson256](https://github.com/Alyson256)  
 **Licença:** MIT License | Licença MIT  
-**Documentação:** [EN](./assets/docs/en.md) | [PT-BR](./assets/docs/pt-br.md)  
+**Documentação:** [EN](../../../README.md) | PT-BR  
 
 ---
 
-![Vantage OS Dashboard](./assets/dashboard.png)
+![Vantage OS Dashboard](../dashboard.png)
 
-## A Visão
+## Geral
+
+O Vantage OS é um dashboard de telemetria de baixo nível e otimização para Windows 11 — seguro, documentado e totalmente reversível.
+
 O Vantage OS transforma a clássica experiência de otimização via terminal (CLI) em uma aplicação desktop profissional. Não é apenas um script de limpeza, mas um motor de telemetria e otimização projetado para monitorar o hardware em tempo real (CPU, GPU, Latência DPC) e aplicar otimizações cirúrgicas sem causar impacto no desempenho do sistema.
 
 *Nota: A fundação de UI/UX e a arquitetura de componentes foram aceleradas e estruturadas utilizando ferramentas de IA. Essa abordagem permitiu a prototipagem rápida, garantindo uma experiência visual premium enquanto mantém o foco absoluto na performance do motor central e nas integrações de baixo nível.*
