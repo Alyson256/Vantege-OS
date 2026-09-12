@@ -17,6 +17,7 @@ O Vantage OS não é só um script de limpeza. É um dashboard de telemetria e o
 > Nota: A base de UI/UX foi prototipada rapidamente em React com apoio de ferramentas de IA, o que permitiu iteração rápida sobre o design visual e a estrutura dos componentes. Esse protótipo está sendo migrado para uma implementação nativa em WPF/WinUI 3 (C#) — um otimizador de sistema não tem motivo pra competir pelos próprios recursos que existe pra liberar, então o app final roda sem nenhum motor de navegador embutido e com consumo mínimo de memória.
 
 # Principais Funcionalidades
+
 Telemetria em Tempo Real — Monitora uso de CPU/GPU, temperatura e consumo de energia ao vivo.
 Análise de Latência — Rastreia o tempo de execução de DPC e ISR pra identificar o que está causando queda de frames ou falhas de áudio em tarefas de tempo real.
 Otimização em Um Clique — Libera cache de RAM e limpa arquivos temporários do sistema com segurança.
