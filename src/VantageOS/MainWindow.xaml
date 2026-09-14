@@ -1,0 +1,43 @@
+<Window x:Class="VantageOS.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VantageOS"
+        xmlns:localViews="clr-namespace:VantageOS.Views"
+        xmlns:viewmodels="clr-namespace:VantageOS.ViewModels"
+        mc:Ignorable="d"
+        Title="{Binding Title}" Height="800" Width="1200"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource BackgroundBrush}"
+        Foreground="{DynamicResource ForegroundBrush}"
+        FontFamily="{StaticResource PlusJakartaSans}">
+    
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewmodels:DashboardViewModel}">
+            <localViews:DashboardView />
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280" /> <!-- Sidebar -->
+            <ColumnDefinition Width="*" /> <!-- Content -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar Placeholder -->
+        <Border Grid.Column="0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="0,0,1,0" Background="#111116">
+            <StackPanel Margin="20">
+                <TextBlock Style="{StaticResource Text2XL}" Text="Vantage OS" Margin="0,0,0,40" Foreground="{DynamicResource ForegroundBrush}"/>
+                
+                <TextBlock Style="{StaticResource TextSm}" Text="Dashboard" Margin="0,10" Foreground="{DynamicResource Blue500Brush}"/>
+                <TextBlock Style="{StaticResource TextSm}" Text="Apps" Margin="0,10" Foreground="{DynamicResource Zinc400Brush}"/>
+                <TextBlock Style="{StaticResource TextSm}" Text="Network" Margin="0,10" Foreground="{DynamicResource Zinc400Brush}"/>
+                <TextBlock Style="{StaticResource TextSm}" Text="Profiles" Margin="0,10" Foreground="{DynamicResource Zinc400Brush}"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Main Content Area (Routed via MVVM) -->
+        <ContentControl Grid.Column="1" Margin="40" Content="{Binding CurrentViewModel}" />
+    </Grid>
+</Window>

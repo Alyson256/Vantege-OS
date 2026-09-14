@@ -1,6 +1,6 @@
 # Vantage OS - Core Engine
 
-> Introducing the brand new Vantage OS, featuring an upgraded interface and advanced tools. The next major update is just around the corner!
+> Introducing the brand new Vantage OS, featuring an upgraded native interface and advanced telemetry tools. The next major update is just around the corner!
 
 **Author:** **Alyson** · [github.com/Alyson256](https://github.com/Alyson256) 
 **License:** MIT License | Licença MIT  
@@ -12,21 +12,21 @@
 
 ## General
 
-Vantage OS is not just a cleaning script. It is a low-level telemetry and optimization dashboard featuring a next-generation interface, designed to monitor hardware in real-time (CPU, GPU, DPC Latency) and apply surgical optimizations without system overhead.
+Vantage OS is not just a cleaning script. It is a low-level telemetry and optimization dashboard featuring a next-generation native interface, designed to monitor hardware in real-time (CPU, GPU, DPC Latency) and apply surgical optimizations without system overhead.
 
-*Note: The UI/UX foundation and component architecture were accelerated and structured utilizing AI tools. This approach allowed for rapid prototyping, ensuring a premium visual experience while maintaining absolute focus on the core engine's performance and low-level integrations.*
+*Note: The UI/UX foundation was initially accelerated utilizing AI tools for rapid prototyping. The project has since transitioned to a fully native C#/.NET architecture, ensuring a premium visual experience with absolute focus on the core engine's performance and low-level system integrations.*
 
 ## Key Features
 - **Real-Time Telemetry:** Monitor usage, temperature, and power consumption.
 - **Latency Analysis:** Track DPC and ISR to ensure zero FPS drops in real-time tasks.
 - **One-Click Optimization:** Safely clean RAM cache and system junk.
-- **Modern UI/UX:** Clean, performance-focused desktop design with native Dark Mode support.
+- **Native Modern UI/UX:** Clean, performance-focused desktop design built with XAML, featuring native Dark Mode support.
 
 ## Project Status: Active Development
-**Current Phase:** UI/UX Refactoring & Backend Integration
+**Current Phase:** Native UI/UX Migration & Backend Integration
 
-The visual foundation is deployed, and I am currently running a sprint focused on stability and WebSocket integration to bind the React frontend with the C/Python hardware telemetry backend.
+The visual foundation has been completely migrated to a C#/.NET stack (WPF/WinUI 3). I am currently running a sprint focused on stability and seamless integration between the new XAML frontend and the hardware telemetry backend.
 
-- **Hotfixes:** Resolving React component lifecycle issues, reorganizing component architecture, and isolating data states.
-- **Code Cleanup:** Stripping redundant mobile-responsive CSS classes to ensure a strictly lightweight desktop experience.
-- **Up Next:** Building the local Python/C core engine to feed the `ws://localhost:3000` telemetry stream.
+- **Hotfixes:** Structuring the MVVM (Model-View-ViewModel) architecture, optimizing XAML data bindings for high-frequency telemetry updates, and isolating data states.
+- **Code Cleanup:** Stripping legacy web dependencies (React/HTML/CSS) to ensure a strictly lightweight, low-overhead native desktop experience.
+- **Up Next:** Binding the C# frontend directly to the local C/Python core engine to feed the real-time telemetry stream.
