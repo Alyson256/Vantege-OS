@@ -17,8 +17,8 @@
 
         <!-- Header -->
         <StackPanel Grid.Row="0" Margin="0,0,0,30">
-            <TextBlock Style="{StaticResource Text2XL}" Text="Visão geral(teste)" />
-            <TextBlock Style="{StaticResource TextSm}" Text="metricas do seu sistema: " Foreground="{DynamicResource Zinc400Brush}" Margin="0,4,0,0" />
+            <TextBlock Style="{StaticResource Text2XL}" Text="Dashboard" />
+            <TextBlock Style="{StaticResource TextSm}" Text="Visão geral do sistema e telemetria em tempo real" Foreground="{DynamicResource Zinc400Brush}" Margin="0,4,0,0" />
         </StackPanel>
 
         <!-- Content Grid (Cards) -->
@@ -35,37 +35,75 @@
             </Grid.RowDefinitions>
             
             <!-- CPU Card -->
-            <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource CardStyle}" Margin="0,0,20,20">
+            <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource CardStyle}" Margin="0,0,16,16">
                 <StackPanel>
-                    <TextBlock Style="{StaticResource TextSm}" Text="CPU Usage" Foreground="{DynamicResource Zinc400Brush}" />
+                    <TextBlock Style="{StaticResource TextSm}" Text="CPU" Foreground="{DynamicResource Blue500Brush}" FontWeight="SemiBold"/>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0" VerticalAlignment="Bottom">
-                        <TextBlock Style="{StaticResource Text2XL}" Text="{Binding CpuUsage}" />
+                        <TextBlock Style="{StaticResource Text2XL}" Text="{Binding CpuUsage, StringFormat={}{0:F1}}" />
                         <TextBlock Style="{StaticResource TextSm}" Text="%" Margin="4,0,0,4" VerticalAlignment="Bottom" Foreground="{DynamicResource Zinc400Brush}"/>
                     </StackPanel>
-                    <TextBlock Style="{StaticResource TextXs}" Text="{Binding CpuModel}" Foreground="{DynamicResource Zinc500Brush}" Margin="0,4,0,0" TextTrimming="CharacterEllipsis"/>
+                    <TextBlock Style="{StaticResource TextXs}" Text="{Binding CpuModel}" Foreground="{DynamicResource Zinc500Brush}" Margin="0,6,0,0" TextTrimming="CharacterEllipsis"/>
                 </StackPanel>
             </Border>
             
             <!-- RAM Card -->
-            <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource CardStyle}" Margin="0,0,20,20">
+            <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource CardStyle}" Margin="0,0,16,16">
                 <StackPanel>
-                    <TextBlock Style="{StaticResource TextSm}" Text="RAM Usage" Foreground="{DynamicResource Zinc400Brush}" />
+                    <TextBlock Style="{StaticResource TextSm}" Text="RAM" Foreground="{DynamicResource Purple500Brush}" FontWeight="SemiBold"/>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0" VerticalAlignment="Bottom">
-                        <TextBlock Style="{StaticResource Text2XL}" Text="{Binding RamUsedGB}" />
-                        <TextBlock Style="{StaticResource TextSm}" Text="GB" Margin="4,0,0,4" VerticalAlignment="Bottom" Foreground="{DynamicResource Zinc400Brush}"/>
+                        <TextBlock Style="{StaticResource Text2XL}" Text="{Binding RamUsedGB, StringFormat={}{0:F1}}" />
+                        <TextBlock Style="{StaticResource TextSm}" Text=" / " Margin="2,0,2,4" VerticalAlignment="Bottom" Foreground="{DynamicResource Zinc500Brush}"/>
+                        <TextBlock Style="{StaticResource TextSm}" Text="{Binding RamTotalGB, StringFormat={}{0:F1} GB}" VerticalAlignment="Bottom" Foreground="{DynamicResource Zinc400Brush}"/>
                     </StackPanel>
-                    <ProgressBar Minimum="0" Maximum="{Binding RamTotalGB}" Value="{Binding RamUsedGB}" Height="4" Margin="0,8,0,0" BorderThickness="0" Foreground="{DynamicResource Purple500Brush}" Background="{DynamicResource Zinc800Brush}"/>
+                    <Grid Margin="0,8,0,0">
+                        <ProgressBar Minimum="0" Maximum="100" Value="{Binding RamUsagePercentage}" Height="6" BorderThickness="0" Foreground="{DynamicResource Purple500Brush}" Background="{DynamicResource Zinc800Brush}"/>
+                    </Grid>
                 </StackPanel>
             </Border>
             
-            <!-- GPU Card (Mock) -->
-            <Border Grid.Row="0" Grid.Column="2" Style="{StaticResource CardStyle}" Margin="0,0,20,20">
+            <!-- GPU Card -->
+            <Border Grid.Row="0" Grid.Column="2" Style="{StaticResource CardStyle}" Margin="0,0,0,16">
                 <StackPanel>
-                    <TextBlock Style="{StaticResource TextSm}" Text="GPU Model" Foreground="{DynamicResource Zinc400Brush}" />
+                    <TextBlock Style="{StaticResource TextSm}" Text="GPU" Foreground="{DynamicResource Rose500Brush}" FontWeight="SemiBold"/>
                     <TextBlock Style="{StaticResource TextLg}" Text="{Binding GpuModel}" Margin="0,10,0,0" TextWrapping="Wrap"/>
                 </StackPanel>
             </Border>
+
+            <!-- DPC Latency Card -->
+            <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource CardStyle}" Margin="0,0,16,16">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource TextSm}" Text="DPC Latency" Foreground="{DynamicResource Amber500Brush}" FontWeight="SemiBold"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <TextBlock Style="{StaticResource Text2XL}" Text="{Binding DpcLatency, StringFormat={}{0:F0}}" />
+                        <TextBlock Style="{StaticResource TextSm}" Text=" μs" Margin="4,0,0,4" VerticalAlignment="Bottom" Foreground="{DynamicResource Zinc400Brush}"/>
+                    </StackPanel>
+                    <TextBlock Style="{StaticResource TextXs}" Text="Standby — ETW pending" Foreground="{DynamicResource Zinc600Brush}" Margin="0,6,0,0"/>
+                </StackPanel>
+            </Border>
             
+            <!-- ISR Latency Card -->
+            <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource CardStyle}" Margin="0,0,16,16">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource TextSm}" Text="ISR Latency" Foreground="{DynamicResource Cyan500Brush}" FontWeight="SemiBold"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <TextBlock Style="{StaticResource Text2XL}" Text="{Binding IsrLatency, StringFormat={}{0:F0}}" />
+                        <TextBlock Style="{StaticResource TextSm}" Text=" μs" Margin="4,0,0,4" VerticalAlignment="Bottom" Foreground="{DynamicResource Zinc400Brush}"/>
+                    </StackPanel>
+                    <TextBlock Style="{StaticResource TextXs}" Text="Standby — ETW pending" Foreground="{DynamicResource Zinc600Brush}" Margin="0,6,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- RAM Percentage Card -->
+            <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource TextSm}" Text="RAM Load" Foreground="{DynamicResource Emerald500Brush}" FontWeight="SemiBold"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <TextBlock Style="{StaticResource Text2XL}" Text="{Binding RamUsagePercentage, StringFormat={}{0:F0}}" />
+                        <TextBlock Style="{StaticResource TextSm}" Text="%" Margin="4,0,0,4" VerticalAlignment="Bottom" Foreground="{DynamicResource Zinc400Brush}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
         </Grid>
     </Grid>
 </UserControl>

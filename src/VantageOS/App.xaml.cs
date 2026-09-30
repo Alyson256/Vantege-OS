@@ -22,6 +22,7 @@ namespace VantageOS
 
             // Services
             services.AddSingleton<ITelemetryService, WmiTelemetryService>();
+            services.AddSingleton<ILocalizationService, LocalizationService>();
 
             // ViewModels
             services.AddTransient<MainViewModel>();

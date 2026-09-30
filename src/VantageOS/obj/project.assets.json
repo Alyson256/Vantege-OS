@@ -1107,11 +1107,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Vantage OS\\src\\VantageOS\\VantageOS.csproj",
+      "projectUniqueName": "e:\\Vantage OS\\src\\VantageOS\\VantageOS.csproj",
       "projectName": "VantageOS",
-      "projectPath": "E:\\Vantage OS\\src\\VantageOS\\VantageOS.csproj",
+      "projectPath": "e:\\Vantage OS\\src\\VantageOS\\VantageOS.csproj",
       "packagesPath": "C:\\Users\\Alyson\\.nuget\\packages\\",
-      "outputPath": "E:\\Vantage OS\\src\\VantageOS\\obj\\",
+      "outputPath": "e:\\Vantage OS\\src\\VantageOS\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Alyson\\AppData\\Roaming\\NuGet\\NuGet.Config"

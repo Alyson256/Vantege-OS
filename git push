@@ -1,0 +1,16 @@
+* [33ma26d6f2[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mnative-wpf[m[33m)[m refactor: new stack for the front end
+[31m|[m * [33m511fa67[m[33m ([m[1;31morigin/Interface-UIUX[m[33m)[m Update documentation for key features in pt-br.md
+[31m|[m * [33mcca4096[m Revise descrição e funcionalidades do Vantage OS
+[31m|[m * [33m3cf76b0[m Revise README for clarity and project updates
+[31m|[m[31m/[m  
+* [33mb1cd650[m[33m ([m[1;32mInterface-UIUX[m[33m)[m "docs: fixes inconsistencies in readme and pt-br"
+* [33m4c999db[m update: some hotfixes and more to the frontend
+* [33m0b32d8a[m[33m ([m[1;31morigin/native-wpf[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Revise README title and enhance project description
+* [33m3893a06[m Refactor README for clarity and formatting
+* [33mfd3c508[m Add placeholder for funding model platforms
+* [33md492688[m Update README with major update announcement
+* [33mf4a65df[m Change copyright holder name in LICENSE
+* [33m32f4c35[m Modify copyright in LICENSE file
+* [33m7b67c9c[m[33m ([m[1;31morigin/hardware-mon[m[33m, [m[1;31morigin/features[m[33m)[m feat(v2.0): major release - graphical interface, auto-updater and hardware inspector
+* [33m9394bb3[m[33m ([m[1;33mtag: [m[1;33mV2.0Upgrade[m[33m)[m feat: add system cleanup script and full PT-BR documentation parity
+* [33m7128fcf[m DOCS: add author section to README 📎

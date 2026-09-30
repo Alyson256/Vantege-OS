@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "O/17K/aEDEA=",
+  "dgSpecHash": "W/PPPrwCNic=",
   "success": true,
-  "projectFilePath": "E:\\Vantage OS\\src\\VantageOS\\VantageOS.csproj",
+  "projectFilePath": "e:\\Vantage OS\\src\\VantageOS\\VantageOS.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Alyson\\.nuget\\packages\\communitytoolkit.mvvm\\8.4.2\\communitytoolkit.mvvm.8.4.2.nupkg.sha512",
     "C:\\Users\\Alyson\\.nuget\\packages\\harfbuzzsharp\\8.3.1.1\\harfbuzzsharp.8.3.1.1.nupkg.sha512",
@@ -34,9 +34,9 @@
       "code": "NU1701",
       "level": "Warning",
       "message": "O pacote 'OpenTK 3.3.1' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net10.0-windows7.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "E:\\Vantage OS\\src\\VantageOS\\VantageOS.csproj",
+      "projectPath": "e:\\Vantage OS\\src\\VantageOS\\VantageOS.csproj",
       "warningLevel": 1,
-      "filePath": "E:\\Vantage OS\\src\\VantageOS\\VantageOS.csproj",
+      "filePath": "e:\\Vantage OS\\src\\VantageOS\\VantageOS.csproj",
       "libraryId": "OpenTK",
       "targetGraphs": [
         "net10.0-windows"
@@ -46,9 +46,9 @@
       "code": "NU1701",
       "level": "Warning",
       "message": "O pacote 'OpenTK.GLWpfControl 3.3.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net10.0-windows7.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "E:\\Vantage OS\\src\\VantageOS\\VantageOS.csproj",
+      "projectPath": "e:\\Vantage OS\\src\\VantageOS\\VantageOS.csproj",
       "warningLevel": 1,
-      "filePath": "E:\\Vantage OS\\src\\VantageOS\\VantageOS.csproj",
+      "filePath": "e:\\Vantage OS\\src\\VantageOS\\VantageOS.csproj",
       "libraryId": "OpenTK.GLWpfControl",
       "targetGraphs": [
         "net10.0-windows"
@@ -58,9 +58,9 @@
       "code": "NU1701",
       "level": "Warning",
       "message": "O pacote 'SkiaSharp.Views.WPF 3.119.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net10.0-windows7.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "E:\\Vantage OS\\src\\VantageOS\\VantageOS.csproj",
+      "projectPath": "e:\\Vantage OS\\src\\VantageOS\\VantageOS.csproj",
       "warningLevel": 1,
-      "filePath": "E:\\Vantage OS\\src\\VantageOS\\VantageOS.csproj",
+      "filePath": "e:\\Vantage OS\\src\\VantageOS\\VantageOS.csproj",
       "libraryId": "SkiaSharp.Views.WPF",
       "targetGraphs": [
         "net10.0-windows"
