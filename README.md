@@ -20,7 +20,7 @@
 > * **Next Steps:** finish the interface, connect data to the backend and finalizing the documentation to reflect the new API integrations and workflow automation. The legacy scripts remain functional during this transition phase.
 > * what can you expect from this major update?
 > * - new interface, new features and many more
-> * * (status - working on branch interface-ui/ux)
+> * * - soon...
 
 ---
 ##  What it does
