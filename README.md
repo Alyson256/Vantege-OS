@@ -6,9 +6,7 @@
 **License:** MIT License | Licença MIT  
 **Language:**  [PT-BR](./src/assets/docs/pt-br.md)  
 
----
 
-![Vantage OS Dashboard](./src/assets/dashboard.png)
 
 ## General
 
@@ -23,10 +21,14 @@ Vantage OS is not just a cleaning script. It is a low-level telemetry and optimi
 - **Native Modern UI/UX:** Clean, performance-focused desktop design built with XAML, featuring native Dark Mode support.
 
 ## Project Status: Active Development
-**Current Phase:** Native UI/UX Migration & Backend Integration
+**Current Phase:** Native UI/UX Implementation & Low-Level API Integration
 
-The visual foundation has been completely migrated to a C#/.NET stack (WPF/WinUI 3). I am currently running a sprint focused on stability and seamless integration between the new XAML frontend and the hardware telemetry backend.
+The visual foundation and core engine have successfully migrated to a C#/.NET WPF architecture. Current focus is on expanding native system controls and refining the MVVM structure.
 
-- **Hotfixes:** Structuring the MVVM (Model-View-ViewModel) architecture, optimizing XAML data bindings for high-frequency telemetry updates, and isolating data states.
-- **Code Cleanup:** Stripping legacy web dependencies (React/HTML/CSS) to ensure a strictly lightweight, low-overhead native desktop experience.
-- **Up Next:** Binding the C# frontend directly to the local C/Python core engine to feed the real-time telemetry stream.
+### Recent Updates (Native-WPF Branch):
+- **Safe Native Optimizations:** Implemented RAM cleaning (via `EmptyWorkingSet` P/Invoke) and Junk Files removal directly through safe Windows APIs, avoiding third-party driver dependencies or kernel risks.
+- **Real-Time Localization (i18n):** Added a dynamic language switching system (PT/EN) directly linked to the MVVM layer, updating the UI instantly without reloads.
+- **Low-Overhead Telemetry:** Integrated `WMI` for static hardware polling (run-once) and safe `P/Invoke` (e.g., `GlobalMemoryStatusEx`) for high-frequency metrics, guaranteeing near-zero DPC Latency generation by the app itself.
+- **Native MVVM Styling:** Successfully ported web-based Tailwind design tokens into native XAML ResourceDictionaries, keeping the premium visual aesthetic while maximizing performance.
+
+- **Up Next:** Building the interactive real-time area charts for `HardwareMonitor` and migrating the Registry engine for the `Custom Tweaks` section.
