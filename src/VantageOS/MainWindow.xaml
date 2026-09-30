@@ -27,14 +27,30 @@
 
         <!-- Sidebar Placeholder -->
         <Border Grid.Column="0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="0,0,1,0" Background="#111116">
-            <StackPanel Margin="20">
-                <TextBlock Style="{StaticResource Text2XL}" Text="Vantage OS" Margin="0,0,0,40" Foreground="{DynamicResource ForegroundBrush}"/>
+            <Grid Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
                 
-                <TextBlock Style="{StaticResource TextSm}" Text="Dashboard" Margin="0,10" Foreground="{DynamicResource Blue500Brush}"/>
-                <TextBlock Style="{StaticResource TextSm}" Text="Apps" Margin="0,10" Foreground="{DynamicResource Zinc400Brush}"/>
-                <TextBlock Style="{StaticResource TextSm}" Text="Network" Margin="0,10" Foreground="{DynamicResource Zinc400Brush}"/>
-                <TextBlock Style="{StaticResource TextSm}" Text="Profiles" Margin="0,10" Foreground="{DynamicResource Zinc400Brush}"/>
-            </StackPanel>
+                <StackPanel Grid.Row="0">
+                    <TextBlock Style="{StaticResource Text2XL}" Text="Vantage OS" Margin="0,0,0,40" Foreground="{DynamicResource ForegroundBrush}"/>
+                    
+                    <TextBlock Style="{StaticResource TextSm}" Text="{Binding DashboardLabel}" Margin="0,10" Foreground="{DynamicResource Blue500Brush}"/>
+                    <TextBlock Style="{StaticResource TextSm}" Text="{Binding AppsLabel}" Margin="0,10" Foreground="{DynamicResource Zinc400Brush}"/>
+                    <TextBlock Style="{StaticResource TextSm}" Text="{Binding NetworkLabel}" Margin="0,10" Foreground="{DynamicResource Zinc400Brush}"/>
+                    <TextBlock Style="{StaticResource TextSm}" Text="{Binding ProfilesLabel}" Margin="0,10" Foreground="{DynamicResource Zinc400Brush}"/>
+                </StackPanel>
+
+                <!-- Settings / Language -->
+                <StackPanel Grid.Row="1" Margin="0,20,0,0">
+                    <TextBlock Style="{StaticResource TextXs}" Text="{Binding LanguageLabel}" Foreground="{DynamicResource Zinc500Brush}" Margin="0,0,0,8"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="PT" Command="{Binding ChangeLanguageCommand}" CommandParameter="pt" Margin="0,0,8,0" Padding="12,4" Background="{DynamicResource Zinc800Brush}" Foreground="{DynamicResource Zinc300Brush}" BorderBrush="{DynamicResource Zinc700Brush}" BorderThickness="1" Cursor="Hand" />
+                        <Button Content="EN" Command="{Binding ChangeLanguageCommand}" CommandParameter="en" Padding="12,4" Background="{DynamicResource Zinc800Brush}" Foreground="{DynamicResource Zinc300Brush}" BorderBrush="{DynamicResource Zinc700Brush}" BorderThickness="1" Cursor="Hand" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
         </Border>
 
         <!-- Main Content Area (Routed via MVVM) -->

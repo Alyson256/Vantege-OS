@@ -17,8 +17,8 @@
 
         <!-- Header -->
         <StackPanel Grid.Row="0" Margin="0,0,0,30">
-            <TextBlock Style="{StaticResource Text2XL}" Text="Dashboard" />
-            <TextBlock Style="{StaticResource TextSm}" Text="Visão geral do sistema e telemetria em tempo real" Foreground="{DynamicResource Zinc400Brush}" Margin="0,4,0,0" />
+            <TextBlock Style="{StaticResource Text2XL}" Text="{Binding TitleLabel}" />
+            <TextBlock Style="{StaticResource TextSm}" Text="{Binding DescriptionLabel}" Foreground="{DynamicResource Zinc400Brush}" Margin="0,4,0,0" />
         </StackPanel>
 
         <!-- Content Grid (Cards) -->
@@ -96,13 +96,95 @@
             <!-- RAM Percentage Card -->
             <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource CardStyle}" Margin="0,0,0,16">
                 <StackPanel>
-                    <TextBlock Style="{StaticResource TextSm}" Text="RAM Load" Foreground="{DynamicResource Emerald500Brush}" FontWeight="SemiBold"/>
+                    <TextBlock Style="{StaticResource TextSm}" Text="{Binding RamLoadLabel}" Foreground="{DynamicResource Emerald500Brush}" FontWeight="SemiBold"/>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                         <TextBlock Style="{StaticResource Text2XL}" Text="{Binding RamUsagePercentage, StringFormat={}{0:F0}}" />
                         <TextBlock Style="{StaticResource TextSm}" Text="%" Margin="4,0,0,4" VerticalAlignment="Bottom" Foreground="{DynamicResource Zinc400Brush}"/>
                     </StackPanel>
                 </StackPanel>
             </Border>
+
+            <!-- Optimization Widgets -->
+            <Grid Grid.Row="2" Grid.ColumnSpan="3" Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                
+                <!-- RAM Optimizer -->
+                <Border Grid.Column="0" Style="{StaticResource CardStyle}" Margin="0,0,16,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0">
+                            <TextBlock Style="{StaticResource TextSm}" Text="{Binding RamOptimizerTitle}" Foreground="{DynamicResource Purple500Brush}" FontWeight="SemiBold"/>
+                            <TextBlock Style="{StaticResource TextXs}" Text="{Binding RamOptimizerDesc}" Foreground="{DynamicResource Zinc400Brush}" Margin="0,4,0,0"/>
+                        </StackPanel>
+                        
+                        <!-- Actions -->
+                        <StackPanel Grid.Row="1" Margin="0,20,0,0" Orientation="Horizontal">
+                            <Button Command="{Binding OptimizeRamCommand}" Padding="16,8" Background="{DynamicResource Blue500Brush}" Foreground="White" BorderThickness="0" Cursor="Hand">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Content" Value="Otimizar RAM" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsOptimizingRam}" Value="True">
+                                                <Setter Property="Content" Value="Otimizando..." />
+                                                <Setter Property="Opacity" Value="0.6" />
+                                                <Setter Property="IsEnabled" Value="False" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsRamOptimized}" Value="True">
+                                                <Setter Property="Content" Value="Concluído!" />
+                                                <Setter Property="Background" Value="{DynamicResource Emerald500Brush}" />
+                                                <Setter Property="IsEnabled" Value="False" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                
+                <!-- Junk Cleaner -->
+                <Border Grid.Column="1" Style="{StaticResource CardStyle}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0">
+                            <TextBlock Style="{StaticResource TextSm}" Text="{Binding JunkCleanerTitle}" Foreground="{DynamicResource Amber500Brush}" FontWeight="SemiBold"/>
+                            <TextBlock Style="{StaticResource TextXs}" Text="{Binding JunkCleanerDesc}" Foreground="{DynamicResource Zinc400Brush}" Margin="0,4,0,0"/>
+                        </StackPanel>
+                        
+                        <!-- Actions -->
+                        <StackPanel Grid.Row="1" Margin="0,20,0,0" Orientation="Horizontal">
+                            <Button Command="{Binding CleanJunkCommand}" Padding="16,8" Background="{DynamicResource Amber500Brush}" Foreground="White" BorderThickness="0" Cursor="Hand">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Content" Value="Limpar Lixo" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsCleaningJunk}" Value="True">
+                                                <Setter Property="Content" Value="Limpando..." />
+                                                <Setter Property="Opacity" Value="0.6" />
+                                                <Setter Property="IsEnabled" Value="False" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsJunkCleaned}" Value="True">
+                                                <Setter Property="Content" Value="Concluído!" />
+                                                <Setter Property="Background" Value="{DynamicResource Emerald500Brush}" />
+                                                <Setter Property="IsEnabled" Value="False" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
 
         </Grid>
     </Grid>
