@@ -17,6 +17,41 @@
         <DataTemplate DataType="{x:Type viewmodels:DashboardViewModel}">
             <localViews:DashboardView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:SystemSpecsViewModel}">
+            <localViews:SystemSpecsView />
+        </DataTemplate>
+
+        <!-- Sidebar Button Style -->
+        <Style x:Key="SidebarButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Foreground" Value="{DynamicResource Zinc400Brush}" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Padding" Value="12,10" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd" Background="{TemplateBinding Background}" 
+                                CornerRadius="8" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#1a1a24"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SidebarButtonActive" TargetType="Button" BasedOn="{StaticResource SidebarButton}">
+            <Setter Property="Background" Value="#1e1e2e" />
+            <Setter Property="Foreground" Value="{DynamicResource Blue500Brush}" />
+        </Style>
     </Window.Resources>
 
     <Grid>
@@ -25,25 +60,44 @@
             <ColumnDefinition Width="*" /> <!-- Content -->
         </Grid.ColumnDefinitions>
 
-        <!-- Sidebar Placeholder -->
+        <!-- Sidebar -->
         <Border Grid.Column="0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="0,0,1,0" Background="#111116">
             <Grid Margin="20">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" /> <!-- Logo -->
+                    <RowDefinition Height="*" />    <!-- Nav -->
+                    <RowDefinition Height="Auto" /> <!-- Settings -->
                 </Grid.RowDefinitions>
                 
-                <StackPanel Grid.Row="0">
-                    <TextBlock Style="{StaticResource Text2XL}" Text="Vantage OS" Margin="0,0,0,40" Foreground="{DynamicResource ForegroundBrush}"/>
-                    
-                    <TextBlock Style="{StaticResource TextSm}" Text="{Binding DashboardLabel}" Margin="0,10" Foreground="{DynamicResource Blue500Brush}"/>
-                    <TextBlock Style="{StaticResource TextSm}" Text="{Binding AppsLabel}" Margin="0,10" Foreground="{DynamicResource Zinc400Brush}"/>
-                    <TextBlock Style="{StaticResource TextSm}" Text="{Binding NetworkLabel}" Margin="0,10" Foreground="{DynamicResource Zinc400Brush}"/>
-                    <TextBlock Style="{StaticResource TextSm}" Text="{Binding ProfilesLabel}" Margin="0,10" Foreground="{DynamicResource Zinc400Brush}"/>
+                <!-- Logo -->
+                <StackPanel Grid.Row="0" Margin="0,0,0,30">
+                    <TextBlock Style="{StaticResource Text2XL}" Text="Vantage OS" Foreground="{DynamicResource ForegroundBrush}"/>
+                    <TextBlock Style="{StaticResource TextXs}" Text="CORE ENGINE" Foreground="{DynamicResource Zinc600Brush}" 
+                               FontWeight="Bold" Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <!-- Navigation -->
+                <StackPanel Grid.Row="1">
+                    <Button Content="{Binding DashboardLabel}" 
+                            Command="{Binding NavigateCommand}" CommandParameter="dashboard"
+                            Style="{StaticResource SidebarButton}">
+                        <Button.Triggers>
+                            <!-- We use DataTriggers in the template instead -->
+                        </Button.Triggers>
+                    </Button>
+                    <Button Content="{Binding SpecsLabel}" 
+                            Command="{Binding NavigateCommand}" CommandParameter="specs"
+                            Style="{StaticResource SidebarButton}" Margin="0,4,0,0"/>
+                    <Button Content="{Binding AppsLabel}" 
+                            Style="{StaticResource SidebarButton}" Margin="0,4,0,0" IsEnabled="False" Opacity="0.4"/>
+                    <Button Content="{Binding NetworkLabel}" 
+                            Style="{StaticResource SidebarButton}" Margin="0,4,0,0" IsEnabled="False" Opacity="0.4"/>
+                    <Button Content="{Binding ProfilesLabel}" 
+                            Style="{StaticResource SidebarButton}" Margin="0,4,0,0" IsEnabled="False" Opacity="0.4"/>
                 </StackPanel>
 
                 <!-- Settings / Language -->
-                <StackPanel Grid.Row="1" Margin="0,20,0,0">
+                <StackPanel Grid.Row="2" Margin="0,20,0,0">
                     <TextBlock Style="{StaticResource TextXs}" Text="{Binding LanguageLabel}" Foreground="{DynamicResource Zinc500Brush}" Margin="0,0,0,8"/>
                     <StackPanel Orientation="Horizontal">
                         <Button Content="PT" Command="{Binding ChangeLanguageCommand}" CommandParameter="pt" Margin="0,0,8,0" Padding="12,4" Background="{DynamicResource Zinc800Brush}" Foreground="{DynamicResource Zinc300Brush}" BorderBrush="{DynamicResource Zinc700Brush}" BorderThickness="1" Cursor="Hand" />

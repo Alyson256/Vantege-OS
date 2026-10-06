@@ -24,10 +24,12 @@ namespace VantageOS
             services.AddSingleton<ITelemetryService, WmiTelemetryService>();
             services.AddSingleton<ILocalizationService, LocalizationService>();
             services.AddSingleton<IOptimizationService, OptimizationService>();
+            services.AddSingleton<ISystemSpecService, SystemSpecService>();
 
             // ViewModels
             services.AddTransient<MainViewModel>();
             services.AddTransient<DashboardViewModel>();
+            services.AddTransient<SystemSpecsViewModel>();
             
             // Views
             services.AddTransient<MainWindow>();

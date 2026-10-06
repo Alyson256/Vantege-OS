@@ -77,3 +77,5 @@ E:\Vantage OS\src\VantageOS\bin\Debug\net10.0-windows\runtimes\win\lib\net10.0\S
 E:\Vantage OS\src\VantageOS\obj\Debug\net10.0-windows\Views\DashboardView.g.cs
 E:\Vantage OS\src\VantageOS\obj\Debug\net10.0-windows\GeneratedInternalTypeHelper.g.cs
 E:\Vantage OS\src\VantageOS\obj\Debug\net10.0-windows\Views\DashboardView.baml
+e:\Vantage OS\src\VantageOS\obj\Debug\net10.0-windows\Views\SystemSpecsView.g.cs
+e:\Vantage OS\src\VantageOS\obj\Debug\net10.0-windows\Views\SystemSpecsView.baml

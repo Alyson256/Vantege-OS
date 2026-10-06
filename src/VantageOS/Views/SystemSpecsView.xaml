@@ -1,0 +1,73 @@
+<UserControl x:Class="VantageOS.Views.SystemSpecsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewmodels="clr-namespace:VantageOS.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="900"
+             d:DataContext="{d:DesignInstance Type=viewmodels:SystemSpecsViewModel}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,30">
+            <TextBlock Style="{StaticResource Text2XL}" Text="{Binding TitleLabel}" />
+            <TextBlock Style="{StaticResource TextSm}" Text="{Binding DescriptionLabel}" Foreground="{DynamicResource Zinc400Brush}" Margin="0,4,0,0" />
+        </StackPanel>
+
+        <!-- Loading indicator -->
+        <TextBlock Grid.Row="1" Text="Carregando hardware..." 
+                   Foreground="{DynamicResource Zinc500Brush}" 
+                   Style="{StaticResource TextSm}"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibility}}" />
+
+        <!-- Specs Grid (3 columns) -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl ItemsSource="{Binding Categories}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource CardStyle}" Margin="0,0,16,16" Padding="20">
+                            <StackPanel>
+                                <!-- Category Header -->
+                                <TextBlock Text="{Binding Name}" 
+                                           Style="{StaticResource TextLg}" 
+                                           FontWeight="SemiBold"
+                                           Margin="0,0,0,16"/>
+
+                                <!-- Spec Items -->
+                                <ItemsControl ItemsSource="{Binding Items}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Margin="0,0,0,10">
+                                                <TextBlock Text="{Binding Label}" 
+                                                           Style="{StaticResource TextXs}" 
+                                                           Foreground="{DynamicResource Zinc500Brush}" 
+                                                           FontWeight="Medium"
+                                                           Margin="0,0,0,2"/>
+                                                <TextBlock Text="{Binding Value}" 
+                                                           Style="{StaticResource TextSm}" 
+                                                           FontWeight="Medium"
+                                                           TextTrimming="CharacterEllipsis"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
