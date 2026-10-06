@@ -6,9 +6,7 @@
 **License:** MIT License | Licença MIT  
 **Language:**  [PT-BR](./src/assets/docs/pt-br.md)  
 
----
 
-![Vantage OS Dashboard](./src/assets/dashboard.png)
 
 ## General
 
