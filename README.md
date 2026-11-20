@@ -19,7 +19,9 @@
 >  * i will keep studying ways to connect the front end and back end and solve some memory leaks, until all is fixed i will test and send a beta branch to test...
 > * **Next Steps:** finish the interface, connect data to the backend and finalizing the documentation to reflect the new API integrations and workflow automation. The legacy scripts remain functional during this transition phase.
 > * what can you expect from this major update?
-> * - new interface, new features and many more
+> * - new interface, new features and revamp code
+>   - new project stack: xaml + c#
+>   - less memory usage
 > * * - soon...
 
 ---
