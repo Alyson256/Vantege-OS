@@ -1,6 +1,6 @@
 <div align="center">
 
-# windows-optimizer( new Vantage OS ) 
+# windows-optimizer( new Bitshift) 
 
 **Post-install Windows 11 optimization scripts — safe, documented, and fully reversible.**
 
