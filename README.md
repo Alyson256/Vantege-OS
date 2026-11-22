@@ -1,4 +1,4 @@
-# Vantage OS - Core Engine
+# (DEPRECATED) Vantage OS - Core Engine
 
 > Introducing the brand new Vantage OS, featuring an upgraded interface and advanced tools. The next major update is just around the corner!
 
