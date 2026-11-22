@@ -1,0 +1,17 @@
+{
+  "dotnet.defaultSolution": "Bitshift.slnx",
+  "csharp.format.enable": true,
+  "omnisharp.enableRoslynAnalyzers": true,
+  "files.associations": {
+    "*.xaml": "xml",
+    "*.slnx": "xml"
+  },
+  "search.exclude": {
+    "**/bin": true,
+    "**/obj": true
+  },
+  "files.watcherExclude": {
+    "**/bin/**": true,
+    "**/obj/**": true
+  }
+}

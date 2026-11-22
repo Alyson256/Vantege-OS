@@ -1,0 +1,294 @@
+<UserControl x:Class="Bitshift.Views.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+             mc:Ignorable="d"
+             d:DesignHeight="750" d:DesignWidth="1100">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" /> <!-- Header -->
+            <RowDefinition Height="*" />    <!-- 3 Hardware Categories: CPU, RAM, GPU -->
+        </Grid.RowDefinitions>
+
+        <!-- Header Direto -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Style="{StaticResource Text2XL}" Text="{Binding TitleLabel}" />
+            <TextBlock Style="{StaticResource TextSm}" Text="{Binding DescriptionLabel}" Foreground="{DynamicResource Zinc400Brush}" Margin="0,3,0,0"/>
+        </StackPanel>
+
+        <!-- Hardware Cards Grid: 3 Dedicated Categories (CPU, RAM, GPU) -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- ── 1. CPU (PROCESSADOR) ── -->
+            <Border Grid.Column="0" Style="{StaticResource CardStyle}" VerticalAlignment="Top">
+                <StackPanel>
+                    <!-- Header -->
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="&#xE7F8;" Style="{StaticResource FluentIcon}" Foreground="{DynamicResource Zinc400Brush}" Margin="0,0,8,0" FontSize="13"/>
+                            <TextBlock Text="CPU" Style="{StaticResource TextSm}" FontWeight="Bold" Foreground="White"/>
+                        </StackPanel>
+                        <TextBlock Grid.Column="1" Text="{Binding CpuModel}" Foreground="{DynamicResource Zinc400Brush}" FontSize="11" FontFamily="Consolas" HorizontalAlignment="Right" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                    </Grid>
+
+                    <!-- Telemetria ao Vivo -->
+                    <Border Background="#0f0f15" BorderBrush="{DynamicResource Zinc800Brush}" BorderThickness="1" CornerRadius="8" Padding="12,10" Margin="0,0,0,14">
+                        <StackPanel>
+                            <Grid Margin="0,0,0,4">
+                                <TextBlock Text="Carga atual" Foreground="{DynamicResource Zinc500Brush}" FontSize="10" FontFamily="Consolas" VerticalAlignment="Center"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <TextBlock Text="{Binding CpuUsage, StringFormat={}{0:F1}}" Foreground="White" FontSize="20" FontWeight="Bold" FontFamily="Consolas"/>
+                                    <TextBlock Text="%" Foreground="{DynamicResource Zinc400Brush}" FontSize="11" Margin="2,0,0,3" VerticalAlignment="Bottom"/>
+                                </StackPanel>
+                            </Grid>
+                            <!-- Live Sparkline -->
+                            <lvc:CartesianChart Height="44" Series="{Binding CpuSeries}" XAxes="{Binding HiddenXAxes}" YAxes="{Binding StandardYAxes}" TooltipPosition="Hidden"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Especificações Técnicas Cruciais (Grid 2 Colunas) -->
+                    <TextBlock Text="ESPECIFICAÇÕES TÉCNICAS" Foreground="{DynamicResource Zinc500Brush}" FontSize="9" FontWeight="Bold" Margin="0,0,0,8"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Clock Base -->
+                        <Border Grid.Row="0" Grid.Column="0" BorderBrush="#1f1f2a" BorderThickness="0,0,0,1" Padding="0,5">
+                            <Grid>
+                                <TextBlock Text="Clock Base" Foreground="{DynamicResource Zinc500Brush}" FontSize="10" FontFamily="Consolas"/>
+                                <TextBlock Text="{Binding CpuBaseClock}" Foreground="{DynamicResource Zinc200Brush}" FontSize="11" FontWeight="Medium" FontFamily="Consolas" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Clock Boost -->
+                        <Border Grid.Row="0" Grid.Column="2" BorderBrush="#1f1f2a" BorderThickness="0,0,0,1" Padding="0,5">
+                            <Grid>
+                                <TextBlock Text="Clock Boost" Foreground="{DynamicResource Zinc500Brush}" FontSize="10" FontFamily="Consolas"/>
+                                <TextBlock Text="{Binding CpuBoostClock}" Foreground="{DynamicResource Zinc200Brush}" FontSize="11" FontWeight="Medium" FontFamily="Consolas" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Núcleos -->
+                        <Border Grid.Row="1" Grid.Column="0" BorderBrush="#1f1f2a" BorderThickness="0,0,0,1" Padding="0,5">
+                            <Grid>
+                                <TextBlock Text="Núcleos" Foreground="{DynamicResource Zinc500Brush}" FontSize="10" FontFamily="Consolas"/>
+                                <TextBlock Text="{Binding CpuCores}" Foreground="{DynamicResource Zinc200Brush}" FontSize="11" FontWeight="Medium" FontFamily="Consolas" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Threads -->
+                        <Border Grid.Row="1" Grid.Column="2" BorderBrush="#1f1f2a" BorderThickness="0,0,0,1" Padding="0,5">
+                            <Grid>
+                                <TextBlock Text="Threads" Foreground="{DynamicResource Zinc500Brush}" FontSize="10" FontFamily="Consolas"/>
+                                <TextBlock Text="{Binding CpuThreads}" Foreground="{DynamicResource Zinc200Brush}" FontSize="11" FontWeight="Medium" FontFamily="Consolas" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Cache L3 -->
+                        <Border Grid.Row="2" Grid.Column="0" Padding="0,5">
+                            <Grid>
+                                <TextBlock Text="Cache L3" Foreground="{DynamicResource Zinc500Brush}" FontSize="10" FontFamily="Consolas"/>
+                                <TextBlock Text="{Binding CpuCacheL3}" Foreground="{DynamicResource Zinc200Brush}" FontSize="11" FontWeight="Medium" FontFamily="Consolas" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Soquete -->
+                        <Border Grid.Row="2" Grid.Column="2" Padding="0,5">
+                            <Grid>
+                                <TextBlock Text="Soquete" Foreground="{DynamicResource Zinc500Brush}" FontSize="10" FontFamily="Consolas"/>
+                                <TextBlock Text="{Binding CpuSocket}" Foreground="{DynamicResource Zinc200Brush}" FontSize="11" FontWeight="Medium" FontFamily="Consolas" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- ── 2. RAM (MEMÓRIA) ── -->
+            <Border Grid.Column="2" Style="{StaticResource CardStyle}" VerticalAlignment="Top">
+                <StackPanel>
+                    <!-- Header -->
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="&#xE950;" Style="{StaticResource FluentIcon}" Foreground="{DynamicResource Zinc400Brush}" Margin="0,0,8,0" FontSize="13"/>
+                            <TextBlock Text="RAM" Style="{StaticResource TextSm}" FontWeight="Bold" Foreground="White"/>
+                        </StackPanel>
+                        <TextBlock Grid.Column="1" Text="{Binding RamSummary}" Foreground="{DynamicResource Zinc400Brush}" FontSize="11" FontFamily="Consolas" HorizontalAlignment="Right" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                    </Grid>
+
+                    <!-- Telemetria ao Vivo -->
+                    <Border Background="#0f0f15" BorderBrush="{DynamicResource Zinc800Brush}" BorderThickness="1" CornerRadius="8" Padding="12,10" Margin="0,0,0,14">
+                        <StackPanel>
+                            <Grid Margin="0,0,0,4">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding RamUsedGB, StringFormat={}{0:F1}}" Foreground="{DynamicResource Zinc400Brush}" FontSize="10" FontFamily="Consolas"/>
+                                    <TextBlock Text=" / " Foreground="{DynamicResource Zinc600Brush}" FontSize="10" FontFamily="Consolas"/>
+                                    <TextBlock Text="{Binding RamTotalGB, StringFormat={}{0:F1} GB}" Foreground="{DynamicResource Zinc400Brush}" FontSize="10" FontFamily="Consolas"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <TextBlock Text="{Binding RamUsagePercentage, StringFormat={}{0:F0}}" Foreground="White" FontSize="20" FontWeight="Bold" FontFamily="Consolas"/>
+                                    <TextBlock Text="%" Foreground="{DynamicResource Zinc400Brush}" FontSize="11" Margin="2,0,0,3" VerticalAlignment="Bottom"/>
+                                </StackPanel>
+                            </Grid>
+                            <!-- Live Sparkline -->
+                            <lvc:CartesianChart Height="44" Series="{Binding RamSeries}" XAxes="{Binding HiddenXAxes}" YAxes="{Binding StandardYAxes}" TooltipPosition="Hidden"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Especificações Técnicas Cruciais (Grid 2 Colunas) -->
+                    <TextBlock Text="ESPECIFICAÇÕES TÉCNICAS" Foreground="{DynamicResource Zinc500Brush}" FontSize="9" FontWeight="Bold" Margin="0,0,0,8"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Tipo -->
+                        <Border Grid.Row="0" Grid.Column="0" BorderBrush="#1f1f2a" BorderThickness="0,0,0,1" Padding="0,5">
+                            <Grid>
+                                <TextBlock Text="Tipo" Foreground="{DynamicResource Zinc500Brush}" FontSize="10" FontFamily="Consolas"/>
+                                <TextBlock Text="{Binding RamType}" Foreground="{DynamicResource Zinc200Brush}" FontSize="11" FontWeight="Medium" FontFamily="Consolas" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Frequência -->
+                        <Border Grid.Row="0" Grid.Column="2" BorderBrush="#1f1f2a" BorderThickness="0,0,0,1" Padding="0,5">
+                            <Grid>
+                                <TextBlock Text="Velocidade" Foreground="{DynamicResource Zinc500Brush}" FontSize="10" FontFamily="Consolas"/>
+                                <TextBlock Text="{Binding RamSpeed}" Foreground="{DynamicResource Zinc200Brush}" FontSize="11" FontWeight="Medium" FontFamily="Consolas" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Slots -->
+                        <Border Grid.Row="1" Grid.Column="0" Padding="0,5">
+                            <Grid>
+                                <TextBlock Text="Slots" Foreground="{DynamicResource Zinc500Brush}" FontSize="10" FontFamily="Consolas"/>
+                                <TextBlock Text="{Binding RamSlots}" Foreground="{DynamicResource Zinc200Brush}" FontSize="11" FontWeight="Medium" FontFamily="Consolas" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Part Number -->
+                        <Border Grid.Row="1" Grid.Column="2" Padding="0,5">
+                            <Grid>
+                                <TextBlock Text="Part No." Foreground="{DynamicResource Zinc500Brush}" FontSize="10" FontFamily="Consolas"/>
+                                <TextBlock Text="{Binding RamPartNumber}" Foreground="{DynamicResource Zinc200Brush}" FontSize="11" FontWeight="Medium" FontFamily="Consolas" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- ── 3. GPU (PLACA DE VÍDEO) ── -->
+            <Border Grid.Column="4" Style="{StaticResource CardStyle}" VerticalAlignment="Top">
+                <StackPanel>
+                    <!-- Header -->
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="&#xE7F4;" Style="{StaticResource FluentIcon}" Foreground="{DynamicResource Zinc400Brush}" Margin="0,0,8,0" FontSize="13"/>
+                            <TextBlock Text="GPU" Style="{StaticResource TextSm}" FontWeight="Bold" Foreground="White"/>
+                        </StackPanel>
+                        <TextBlock Grid.Column="1" Text="{Binding GpuModel}" Foreground="{DynamicResource Zinc400Brush}" FontSize="11" FontFamily="Consolas" HorizontalAlignment="Right" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                    </Grid>
+
+                    <!-- Telemetria ao Vivo -->
+                    <Border Background="#0f0f15" BorderBrush="{DynamicResource Zinc800Brush}" BorderThickness="1" CornerRadius="8" Padding="12,10" Margin="0,0,0,14">
+                        <StackPanel>
+                            <Grid Margin="0,0,0,4">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding GpuVramUsedGB, StringFormat={}{0:F1}}" Foreground="{DynamicResource Zinc400Brush}" FontSize="10" FontFamily="Consolas"/>
+                                    <TextBlock Text=" / " Foreground="{DynamicResource Zinc600Brush}" FontSize="10" FontFamily="Consolas"/>
+                                    <TextBlock Text="{Binding GpuVramTotalGB, StringFormat={}{0:F1} GB VRAM}" Foreground="{DynamicResource Zinc400Brush}" FontSize="10" FontFamily="Consolas"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <TextBlock Text="{Binding GpuUsage, StringFormat={}{0:F0}}" Foreground="White" FontSize="20" FontWeight="Bold" FontFamily="Consolas"/>
+                                    <TextBlock Text="%" Foreground="{DynamicResource Zinc400Brush}" FontSize="11" Margin="2,0,0,3" VerticalAlignment="Bottom"/>
+                                </StackPanel>
+                            </Grid>
+                            <!-- Live Sparkline -->
+                            <lvc:CartesianChart Height="44" Series="{Binding GpuSeries}" XAxes="{Binding HiddenXAxes}" YAxes="{Binding StandardYAxes}" TooltipPosition="Hidden"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Especificações Técnicas Cruciais (Grid 2 Colunas) -->
+                    <TextBlock Text="ESPECIFICAÇÕES TÉCNICAS" Foreground="{DynamicResource Zinc500Brush}" FontSize="9" FontWeight="Bold" Margin="0,0,0,8"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- VRAM -->
+                        <Border Grid.Row="0" Grid.Column="0" BorderBrush="#1f1f2a" BorderThickness="0,0,0,1" Padding="0,5">
+                            <Grid>
+                                <TextBlock Text="VRAM" Foreground="{DynamicResource Zinc500Brush}" FontSize="10" FontFamily="Consolas"/>
+                                <TextBlock Text="{Binding GpuVram}" Foreground="{DynamicResource Zinc200Brush}" FontSize="11" FontWeight="Medium" FontFamily="Consolas" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- DirectX -->
+                        <Border Grid.Row="0" Grid.Column="2" BorderBrush="#1f1f2a" BorderThickness="0,0,0,1" Padding="0,5">
+                            <Grid>
+                                <TextBlock Text="DirectX" Foreground="{DynamicResource Zinc500Brush}" FontSize="10" FontFamily="Consolas"/>
+                                <TextBlock Text="{Binding GpuDirectX}" Foreground="{DynamicResource Zinc200Brush}" FontSize="11" FontWeight="Medium" FontFamily="Consolas" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Driver -->
+                        <Border Grid.Row="1" Grid.Column="0" Padding="0,5">
+                            <Grid>
+                                <TextBlock Text="Driver" Foreground="{DynamicResource Zinc500Brush}" FontSize="10" FontFamily="Consolas"/>
+                                <TextBlock Text="{Binding GpuDriver}" Foreground="{DynamicResource Zinc200Brush}" FontSize="11" FontWeight="Medium" FontFamily="Consolas" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Resolução -->
+                        <Border Grid.Row="1" Grid.Column="2" Padding="0,5">
+                            <Grid>
+                                <TextBlock Text="Display" Foreground="{DynamicResource Zinc500Brush}" FontSize="10" FontFamily="Consolas"/>
+                                <TextBlock Text="{Binding GpuResolution}" Foreground="{DynamicResource Zinc200Brush}" FontSize="11" FontWeight="Medium" FontFamily="Consolas" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

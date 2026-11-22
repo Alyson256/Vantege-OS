@@ -1,0 +1,192 @@
+<UserControl x:Class="Bitshift.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="760" d:DesignWidth="920">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="0,0,20,20">
+            <!-- Header -->
+            <Grid Margin="0,0,0,22">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="{Binding PageTitle}" Style="{StaticResource Text2XL}" />
+                    <TextBlock Text="{Binding PageDesc}" Style="{StaticResource TextSm}" Foreground="{DynamicResource Zinc400Brush}" Margin="0,4,0,0" TextWrapping="Wrap" />
+                </StackPanel>
+                <Button Grid.Column="1" Content="{Binding ResetDefaultsLabel}" Command="{Binding ResetDefaultsCommand}"
+                        Style="{StaticResource OutlineButton}" VerticalAlignment="Center" />
+            </Grid>
+
+            <!-- Section: Bandeja do Sistema -->
+            <TextBlock Text="{Binding TraySectionTitle}" Foreground="{DynamicResource Zinc400Brush}" FontSize="12" FontWeight="Bold" Margin="0,0,0,10" />
+            <Border Style="{StaticResource CardStyle}" Margin="0,0,0,20">
+                <StackPanel>
+                    <!-- Minimizar para bandeja -->
+                    <Grid Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0,0,16,0">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="&#xE921;" Style="{StaticResource FluentIcon}" FontSize="14" Foreground="{DynamicResource AccentTextBrush}" Margin="0,0,8,0" VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding MinimizeToTrayTitle}" Style="{StaticResource TextSm}" Foreground="White" FontWeight="SemiBold" />
+                            </StackPanel>
+                            <TextBlock Text="{Binding MinimizeToTrayDesc}" Foreground="{DynamicResource Zinc400Brush}" FontSize="12" Margin="0,4,0,0" TextWrapping="Wrap" />
+                        </StackPanel>
+                        <CheckBox Grid.Column="1" IsChecked="{Binding MinimizeToTray}" Style="{StaticResource ToggleSwitchStyle}" VerticalAlignment="Center" />
+                    </Grid>
+
+                    <Border Height="1" Background="{DynamicResource Zinc800Brush}" Margin="0,0,0,16" />
+
+                    <!-- Notificação ao minimizar -->
+                    <Grid Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0,0,16,0">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="&#xEA8F;" Style="{StaticResource FluentIcon}" FontSize="14" Foreground="{DynamicResource AccentTextBrush}" Margin="0,0,8,0" VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding ShowTrayNotificationTitle}" Style="{StaticResource TextSm}" Foreground="White" FontWeight="SemiBold" />
+                            </StackPanel>
+                            <TextBlock Text="{Binding ShowTrayNotificationDesc}" Foreground="{DynamicResource Zinc400Brush}" FontSize="12" Margin="0,4,0,0" TextWrapping="Wrap" />
+                        </StackPanel>
+                        <CheckBox Grid.Column="1" IsChecked="{Binding ShowTrayNotificationOnMinimize}" IsEnabled="{Binding MinimizeToTray}" Style="{StaticResource ToggleSwitchStyle}" VerticalAlignment="Center" />
+                    </Grid>
+
+                    <Border Height="1" Background="{DynamicResource Zinc800Brush}" Margin="0,0,0,14" />
+
+                    <!-- Quick Minimize Trigger -->
+                    <Grid>
+                        <Button HorizontalAlignment="Right" Content="{Binding TestMinimizeLabel}" Command="{Binding MinimizeToTrayNowCommand}"
+                                Style="{StaticResource OutlineButton}" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- Section: Preferências Gerais -->
+            <TextBlock Text="{Binding GeneralSectionTitle}" Foreground="{DynamicResource Zinc400Brush}" FontSize="12" FontWeight="Bold" Margin="0,0,0,10" />
+            <Border Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <!-- Idioma -->
+                    <Grid Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0,0,16,0">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="&#xF2B7;" Style="{StaticResource FluentIcon}" FontSize="14" Foreground="{DynamicResource AccentTextBrush}" Margin="0,0,8,0" VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding LanguageTitle}" Style="{StaticResource TextSm}" Foreground="White" FontWeight="SemiBold" />
+                            </StackPanel>
+                            <TextBlock Text="{Binding LanguageDesc}" Foreground="{DynamicResource Zinc400Brush}" FontSize="12" Margin="0,4,0,0" TextWrapping="Wrap" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                            <Button Content="Português (BR)" Command="{Binding SetLanguageCommand}" CommandParameter="pt" Margin="0,0,8,0">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource OutlineButton}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsPortuguese}" Value="True">
+                                                <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+                                                <Setter Property="BorderBrush" Value="{DynamicResource AccentBorderBrush}" />
+                                                <Setter Property="Foreground" Value="White" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            <Button Content="English (US)" Command="{Binding SetLanguageCommand}" CommandParameter="en">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource OutlineButton}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsEnglish}" Value="True">
+                                                <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+                                                <Setter Property="BorderBrush" Value="{DynamicResource AccentBorderBrush}" />
+                                                <Setter Property="Foreground" Value="White" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
+                    <Border Height="1" Background="{DynamicResource Zinc800Brush}" Margin="0,0,0,16" />
+
+                    <!-- Tema da Aparência -->
+                    <Grid Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0,0,16,0">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock FontSize="14" Foreground="{DynamicResource AccentTextBrush}" Margin="0,0,8,0" VerticalAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock" BasedOn="{StaticResource FluentIcon}">
+                                            <Setter Property="Text" Value="&#xE708;" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsDarkMode}" Value="False">
+                                                    <Setter Property="Text" Value="&#xE706;" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="{Binding ThemeTitle}" Style="{StaticResource TextSm}" Foreground="White" FontWeight="SemiBold" />
+                            </StackPanel>
+                            <TextBlock Text="{Binding ThemeDesc}" Foreground="{DynamicResource Zinc400Brush}" FontSize="12" Margin="0,4,0,0" TextWrapping="Wrap" />
+                        </StackPanel>
+                        <Button Grid.Column="1" Content="{Binding ThemeStatusLabel}" Command="{Binding ToggleThemeCommand}"
+                                Style="{StaticResource OutlineButton}" VerticalAlignment="Center" />
+                    </Grid>
+
+                    <Border Height="1" Background="{DynamicResource Zinc800Brush}" Margin="0,0,0,16" />
+
+                    <!-- Cor de Destaque -->
+                    <Grid Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0,0,16,0">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="&#xE790;" Style="{StaticResource FluentIcon}" FontSize="14" Foreground="{DynamicResource AccentTextBrush}" Margin="0,0,8,0" VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding AccentTitle}" Style="{StaticResource TextSm}" Foreground="White" FontWeight="SemiBold" />
+                            </StackPanel>
+                            <TextBlock Text="{Binding AccentDesc}" Foreground="{DynamicResource Zinc400Brush}" FontSize="12" Margin="0,4,0,0" TextWrapping="Wrap" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                            <Ellipse Width="12" Height="12" Fill="{DynamicResource AccentBrush}" Margin="0,0,8,0" VerticalAlignment="Center" />
+                            <TextBlock Text="{Binding AccentColorHex}" Foreground="{DynamicResource Zinc300Brush}" FontFamily="Consolas" FontSize="12" VerticalAlignment="Center" Margin="0,0,12,0" />
+                            <Button Content="{Binding ReloadAccentLabel}" Command="{Binding ReloadAccentColorCommand}" Style="{StaticResource OutlineButton}" />
+                        </StackPanel>
+                    </Grid>
+
+                    <Border Height="1" Background="{DynamicResource Zinc800Brush}" Margin="0,0,0,16" />
+
+                    <!-- Verificação automática de atualizações ao iniciar -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0,0,16,0">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="&#xE895;" Style="{StaticResource FluentIcon}" FontSize="14" Foreground="{DynamicResource AccentTextBrush}" Margin="0,0,8,0" VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding AutoCheckUpdatesTitle}" Style="{StaticResource TextSm}" Foreground="White" FontWeight="SemiBold" />
+                            </StackPanel>
+                            <TextBlock Text="{Binding AutoCheckUpdatesDesc}" Foreground="{DynamicResource Zinc400Brush}" FontSize="12" Margin="0,4,0,0" TextWrapping="Wrap" />
+                        </StackPanel>
+                        <CheckBox Grid.Column="1" IsChecked="{Binding AutoCheckUpdatesOnStartup}" Style="{StaticResource ToggleSwitchStyle}" VerticalAlignment="Center" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

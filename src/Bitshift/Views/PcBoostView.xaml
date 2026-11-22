@@ -1,0 +1,167 @@
+<UserControl x:Class="Bitshift.Views.PcBoostView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="780" d:DesignWidth="920">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="0,0,20,20">
+            <!-- Header -->
+            <TextBlock Text="{Binding PageTitle}" Style="{StaticResource Text2XL}" />
+            <TextBlock Text="{Binding PageDesc}" Style="{StaticResource TextSm}" Foreground="{DynamicResource Zinc400Brush}" Margin="0,4,0,20" TextWrapping="Wrap" />
+
+            <!-- Section 1: Modos de Energia -->
+            <TextBlock Text="Modos de Energia do Sistema" Foreground="{DynamicResource Zinc400Brush}" FontSize="12" FontWeight="Bold" Margin="0,0,0,10" />
+            <Grid Margin="0,0,0,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="12" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="12" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Eco -->
+                <Border Grid.Column="0" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Economia (Eco)" Style="{StaticResource TextLg}" Foreground="{DynamicResource Emerald500Brush}" />
+                        <TextBlock Text="Reduz consumo energético e clocks ociosos mantendo responsividade estável." Foreground="{DynamicResource Zinc400Brush}" FontSize="12" Margin="0,6,0,14" TextWrapping="Wrap" />
+                        <Button Content="Ativar Eco" Command="{Binding SelectPowerModeCommand}" CommandParameter="eco" Style="{StaticResource OutlineButton}" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Balanced -->
+                <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Equilibrado" Style="{StaticResource TextLg}" Foreground="{DynamicResource Blue500Brush}" />
+                        <TextBlock Text="Equilíbrio dinâmico padrão do Windows entre desempenho e eficiência." Foreground="{DynamicResource Zinc400Brush}" FontSize="12" Margin="0,6,0,14" TextWrapping="Wrap" />
+                        <Button Content="Ativar Equilibrado" Command="{Binding SelectPowerModeCommand}" CommandParameter="balanced" Style="{StaticResource OutlineButton}" />
+                    </StackPanel>
+                </Border>
+
+                <!-- High Performance -->
+                <Border Grid.Column="4" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Alto Desempenho" Style="{StaticResource TextLg}" Foreground="{DynamicResource Amber500Brush}" />
+                        <TextBlock Text="Prioriza máxima frequência de CPU e menor latência de resposta." Foreground="{DynamicResource Zinc400Brush}" FontSize="12" Margin="0,6,0,14" TextWrapping="Wrap" />
+                        <Button Content="Ativar Alto Desempenho" Command="{Binding SelectPowerModeCommand}" CommandParameter="performance"
+                                Background="{DynamicResource AccentBrush}" Foreground="White" BorderThickness="0" Padding="14,8" Cursor="Hand" FontWeight="SemiBold">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <TextBlock Text="{Binding PowerModeStatus}" Foreground="{DynamicResource AccentTextBrush}" FontSize="12" Margin="0,0,0,18"
+                       Visibility="{Binding PowerModeStatus, Converter={StaticResource BoolToVis}}" />
+
+            <!-- Section 2: Limpeza de Disco & Temporários -->
+            <TextBlock Text="Limpeza Segura do Sistema" Foreground="{DynamicResource Zinc400Brush}" FontSize="12" FontWeight="Bold" Margin="0,0,0,10" />
+            <Border Style="{StaticResource CardStyle}" Margin="0,0,0,20">
+                <StackPanel>
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <CheckBox Grid.Column="0" IsChecked="{Binding CleanWinCache}" Content="Cache do Windows (Prefetch, D3DSCache, Thumbnails)" Foreground="White" Cursor="Hand" />
+                        <TextBlock Grid.Column="1" Text="{Binding WinCacheSizeText}" Foreground="{DynamicResource Zinc400Brush}" FontFamily="Consolas" FontSize="12" VerticalAlignment="Center" />
+                    </Grid>
+
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <CheckBox Grid.Column="0" IsChecked="{Binding CleanTempFiles}" Content="Arquivos Temporários (%TEMP% e Windows\Temp)" Foreground="White" Cursor="Hand" />
+                        <TextBlock Grid.Column="1" Text="{Binding TempFilesSizeText}" Foreground="{DynamicResource Zinc400Brush}" FontFamily="Consolas" FontSize="12" VerticalAlignment="Center" />
+                    </Grid>
+
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <CheckBox Grid.Column="0" IsChecked="{Binding CleanUpdateCache}" Content="Cache do Windows Update (SoftwareDistribution)" Foreground="White" Cursor="Hand" />
+                        <TextBlock Grid.Column="1" Text="{Binding UpdateCacheSizeText}" Foreground="{DynamicResource Zinc400Brush}" FontFamily="Consolas" FontSize="12" VerticalAlignment="Center" />
+                    </Grid>
+
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <CheckBox Grid.Column="0" IsChecked="{Binding CleanOldLogs}" Content="Logs Antigos e Relatórios de Falha (WER / CrashDumps)" Foreground="White" Cursor="Hand" />
+                        <TextBlock Grid.Column="1" Text="{Binding OldLogsSizeText}" Foreground="{DynamicResource Zinc400Brush}" FontFamily="Consolas" FontSize="12" VerticalAlignment="Center" />
+                    </Grid>
+
+                    <Grid Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <CheckBox Grid.Column="0" IsChecked="{Binding CleanUnusedFiles}" Content="Arquivos Temporários Inativos (Downloads / Temp > 30 dias)" Foreground="White" Cursor="Hand" />
+                        <TextBlock Grid.Column="1" Text="{Binding UnusedFilesSizeText}" Foreground="{DynamicResource Zinc400Brush}" FontFamily="Consolas" FontSize="12" VerticalAlignment="Center" />
+                    </Grid>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="Reanalisar Espaço" Command="{Binding ScanCleanerCommand}" Style="{StaticResource OutlineButton}" Margin="0,0,10,0" />
+                        <Button Content="Limpar Selecionados" Command="{Binding CleanSystemCommand}"
+                                Background="{DynamicResource AccentBrush}" Foreground="White" BorderThickness="0" Padding="16,8" Cursor="Hand" FontWeight="SemiBold">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+
+                    <TextBlock Text="{Binding CleanerStatus}" Foreground="{DynamicResource Emerald500Brush}" FontSize="12" Margin="0,10,0,0"
+                               Visibility="{Binding CleanerStatus, Converter={StaticResource BoolToVis}}" />
+                </StackPanel>
+            </Border>
+
+            <!-- Section 3: Otimização de Memória RAM -->
+            <TextBlock Text="Otimização de Memória RAM" Foreground="{DynamicResource Zinc400Brush}" FontSize="12" FontWeight="Bold" Margin="0,0,0,10" />
+            <Border Style="{StaticResource CardStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="Uso atual da RAM: " Foreground="{DynamicResource Zinc300Brush}" FontSize="13" FontWeight="SemiBold" />
+                            <TextBlock Text="{Binding RamUsedGb, StringFormat={}{0:F1}}" Foreground="White" FontFamily="Consolas" FontSize="13" FontWeight="Bold" />
+                            <TextBlock Text=" / " Foreground="{DynamicResource Zinc500Brush}" FontFamily="Consolas" FontSize="13" />
+                            <TextBlock Text="{Binding RamTotalGb, StringFormat={}{0:F1} GB}" Foreground="{DynamicResource Zinc300Brush}" FontFamily="Consolas" FontSize="13" />
+                            <TextBlock Text="{Binding RamUsagePercentage, StringFormat=' ({0:F0}%)'}" Foreground="{DynamicResource AccentTextBrush}" FontFamily="Consolas" FontSize="13" FontWeight="Bold" />
+                        </StackPanel>
+                        <TextBlock Text="Reduz o working set de processos em segundo plano via psapi.dll (EmptyWorkingSet) sem encerrar aplicativos." Foreground="{DynamicResource Zinc400Brush}" FontSize="12" Margin="0,4,0,0" TextWrapping="Wrap" />
+                        <TextBlock Text="{Binding RamStatus}" Foreground="{DynamicResource Emerald500Brush}" FontSize="12" Margin="0,8,0,0"
+                                   Visibility="{Binding RamStatus, Converter={StaticResource BoolToVis}}" />
+                    </StackPanel>
+                    <Button Grid.Column="1" Content="Limpar RAM" Command="{Binding CleanRamCommand}"
+                            Background="{DynamicResource Emerald500Brush}" Foreground="White" BorderThickness="0" Padding="18,10" Cursor="Hand" FontWeight="SemiBold" VerticalAlignment="Center" Margin="16,0,0,0">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

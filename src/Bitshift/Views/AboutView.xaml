@@ -1,0 +1,152 @@
+<UserControl x:Class="Bitshift.Views.AboutView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="780" d:DesignWidth="920">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="0,0,20,20">
+            <!-- Header -->
+            <Grid Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Sobre o BITSHIFT" Style="{StaticResource Text2XL}"/>
+                    <TextBlock Text="Especificação da stack técnica, arquitetura e metodologia de desenvolvimento." Style="{StaticResource TextSm}" Foreground="{DynamicResource Zinc400Brush}" Margin="0,4,0,0" TextWrapping="Wrap"/>
+                </StackPanel>
+                <Border Grid.Column="1" Background="{DynamicResource AccentSubtleBrush}" BorderBrush="{DynamicResource AccentBorderBrush}" BorderThickness="1" CornerRadius="8" Padding="10,4" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding AppVersion}" Foreground="{DynamicResource AccentTextBrush}" FontSize="11" FontWeight="Bold"/>
+                </Border>
+            </Grid>
+
+            <!-- Section 1: Stack Tecnológica -->
+            <TextBlock Text="Stack Tecnológica" Foreground="{DynamicResource Zinc400Brush}" FontSize="12" FontWeight="Bold" Margin="0,0,0,12"/>
+            <Grid Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="16" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Core Engine Card -->
+                <Border Grid.Column="0" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Core Engine &amp; Desktop Runtime" Style="{StaticResource TextLg}" Foreground="{DynamicResource Blue500Brush}"/>
+                        <TextBlock Text="C# 13, .NET 10 (net10.0-windows) e CommunityToolkit.Mvvm com injeção de dependências nativa." Foreground="{DynamicResource Zinc300Brush}" FontSize="12" Margin="0,6,0,8" TextWrapping="Wrap"/>
+                        <TextBlock Text="• GUI em XAML acelerada por GPU (DirectX) com LiveCharts2 SkiaSharp." Foreground="{DynamicResource Zinc400Brush}" FontSize="11" Margin="0,0,0,4"/>
+                        <TextBlock Text="• Ciclo de vida modular com logging live stream assíncrono." Foreground="{DynamicResource Zinc400Brush}" FontSize="11"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Low-level Interop Card -->
+                <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Interoperabilidade Win32 &amp; Kernel" Style="{StaticResource TextLg}" Foreground="{DynamicResource Amber500Brush}"/>
+                        <TextBlock Text="psapi.dll (EmptyWorkingSet), kernel32.dll e dwmapi.dll sem sobrecarga de processamento." Foreground="{DynamicResource Zinc300Brush}" FontSize="12" Margin="0,6,0,8" TextWrapping="Wrap"/>
+                        <TextBlock Text="• Leitura de cor de destaque DWM diretamente do Registro do Windows." Foreground="{DynamicResource Zinc400Brush}" FontSize="11" Margin="0,0,0,4"/>
+                        <TextBlock Text="• WMI seguro com chamada única assíncrona na inicialização (0% CPU residual)." Foreground="{DynamicResource Zinc400Brush}" FontSize="11"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Section 2: Metodologia -->
+            <TextBlock Text="Método de Desenvolvimento &amp; Princípios de Engenharia" Foreground="{DynamicResource Zinc400Brush}" FontSize="12" FontWeight="Bold" Margin="0,0,0,12"/>
+            <Grid Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="16" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="16" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="1. Isolamento de Threads (Zero UI Freezes)" Style="{StaticResource TextSm}" Foreground="White" FontWeight="Bold"/>
+                        <TextBlock Text="Todas as chamadas do kernel e scripts .bat são despachadas via Task.Run() e async/await. A UI Thread nunca congela, mantendo 60+ FPS com feedback tátil." Foreground="{DynamicResource Zinc400Brush}" FontSize="11" Margin="0,4,0,0" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="2" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="2. Filosofia User-Mode (Ring-3) &amp; Anti-Cheat Safe" Style="{StaticResource TextSm}" Foreground="White" FontWeight="Bold"/>
+                        <TextBlock Text="O BITSHIFT opera estritamente em espaço de usuário (Ring-3). Não carrega drivers não assinados, sendo 100% seguro contra banimentos de anti-cheats (Vanguard, EAC, BattlEye)." Foreground="{DynamicResource Zinc400Brush}" FontSize="11" Margin="0,4,0,0" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="2" Grid.Column="0" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="3. Engenharia Defensiva &amp; Reversibilidade Total" Style="{StaticResource TextSm}" Foreground="White" FontWeight="Bold"/>
+                        <TextBlock Text="Permite criar Pontos de Restauração nativos do Windows antes de qualquer alteração, além de incluir o script 10_undo_all.bat para restaurar configurações originais a qualquer momento." Foreground="{DynamicResource Zinc400Brush}" FontSize="11" Margin="0,4,0,0" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="2" Grid.Column="2" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="4. Micro-Educação &amp; Transparência Radical" Style="{StaticResource TextSm}" Foreground="White" FontWeight="Bold"/>
+                        <TextBlock Text="Termos técnicos avançados contam com explicações contextuais nativas. Código aberto, auditável e sem funções ocultas." Foreground="{DynamicResource Zinc400Brush}" FontSize="11" Margin="0,4,0,0" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Repository & Ko-fi Support Cards -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="16" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Background="#10141a" BorderBrush="{DynamicResource Blue500Brush}" BorderThickness="1" CornerRadius="12" Padding="16">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Repositório Aberto &amp; Licença" Foreground="White" FontWeight="Bold" FontSize="12"/>
+                            <TextBlock Text="Desenvolvido por Alyson Araújo • Código 100% público e auditável sob Licença MIT." Foreground="{DynamicResource Zinc400Brush}" FontSize="11" Margin="0,3,0,0" TextWrapping="Wrap"/>
+                        </StackPanel>
+                        <Button Grid.Column="1" Content="GitHub Oficial" Command="{Binding OpenRepositoryCommand}"
+                                Background="#27272A" Foreground="White" BorderBrush="{DynamicResource Zinc700Brush}" BorderThickness="1" Padding="14,8" Cursor="Hand" FontWeight="SemiBold" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Apoiar via Ko-fi" Foreground="White" FontWeight="Bold" FontSize="12"/>
+                        <TextBlock Text="Apoie o desenvolvimento de forma privada e segura via Ko-fi, sem exposição de dados pessoais." Foreground="{DynamicResource Zinc400Brush}" FontSize="11" Margin="0,3,0,10" TextWrapping="Wrap"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="Abrir Ko-fi" Command="{Binding OpenKofiCommand}" Background="#FF5E5B" Foreground="White" BorderThickness="0" Padding="12,7" Cursor="Hand" FontWeight="SemiBold" FontSize="11" Margin="0,0,8,0">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button Content="Copiar Link" Command="{Binding CopyKofiUrlCommand}" Style="{StaticResource OutlineButton}" Padding="12,6" FontSize="11"/>
+                        </StackPanel>
+                        <TextBlock Text="{Binding KofiStatusMessage}" Foreground="{DynamicResource Emerald500Brush}" FontSize="11" Margin="0,8,0,0"
+                                   Visibility="{Binding KofiStatusMessage, Converter={StaticResource BoolToVis}}"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

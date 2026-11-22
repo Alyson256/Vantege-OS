@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Bitshift Desktop (.NET WPF)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "dotnet: build (Bitshift WPF)",
+      "program": "${workspaceFolder}/src/Bitshift/bin/Debug/net10.0-windows/Bitshift.exe",
+      "args": [],
+      "cwd": "${workspaceFolder}/src/Bitshift",
+      "console": "internalConsole",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Debug Bitshift Desktop (C# Dev Kit)",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/src/Bitshift/Bitshift.csproj",
+      "args": []
+    }
+  ]
+}

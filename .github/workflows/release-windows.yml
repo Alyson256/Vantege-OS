@@ -1,0 +1,130 @@
+name: Build and Release Windows Desktop App
+
+on:
+  push:
+    tags:
+      # GitHub tag filters are globs, not regular expressions. Exact SemVer is validated below.
+      - 'v[0-9]*.[0-9]*.[0-9]*'
+      - '!v*-*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version label for this test build
+        required: false
+        default: 0.0.0-dev
+        type: string
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      is_release: ${{ steps.version.outputs.is_release }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Setup .NET 10 SDK
+        uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Determine version
+        id: version
+        env:
+          DISPATCH_VERSION: ${{ inputs.version }}
+        shell: pwsh
+        run: |
+          if ($env:GITHUB_EVENT_NAME -eq 'push') {
+            $tag = $env:GITHUB_REF_NAME
+            if ($tag -notmatch '^v\d+\.\d+\.\d+$') {
+              throw "Release tags must match vMAJOR.MINOR.PATCH without a suffix: $tag"
+            }
+            $version = $tag.Substring(1)
+            $isRelease = 'true'
+          } else {
+            $version = $env:DISPATCH_VERSION
+            if ($version -notmatch '^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$') {
+              throw "The workflow version must match MAJOR.MINOR.PATCH[-prerelease]: $version"
+            }
+            $isRelease = 'false'
+          }
+
+          $numericVersion = $version.Split('-')[0]
+          $assemblyVersion = "$numericVersion.0"
+          Add-Content -Path $env:GITHUB_OUTPUT -Value "version=$version"
+          Add-Content -Path $env:GITHUB_OUTPUT -Value "assembly_version=$assemblyVersion"
+          Add-Content -Path $env:GITHUB_OUTPUT -Value "is_release=$isRelease"
+
+      - name: Restore dependencies
+        run: dotnet restore Bitshift.slnx
+
+      - name: Build Release
+        run: dotnet build src/Bitshift/Bitshift.csproj -c Release --no-restore
+
+      - name: Publish win-x64 self-contained single-file app
+        env:
+          APP_VERSION: ${{ steps.version.outputs.version }}
+          APP_ASSEMBLY_VERSION: ${{ steps.version.outputs.assembly_version }}
+        run: >
+          dotnet publish src/Bitshift/Bitshift.csproj
+          -c Release
+          -r win-x64
+          --self-contained true
+          -p:PublishSingleFile=true
+          -p:IncludeNativeLibrariesForSelfExtract=true
+          -p:EnableCompressionInSingleFile=true
+          -p:DebugType=none
+          -p:DebugSymbols=false
+          -p:Version=$env:APP_VERSION
+          -p:InformationalVersion=$env:APP_VERSION
+          -p:AssemblyVersion=$env:APP_ASSEMBLY_VERSION
+          -p:FileVersion=$env:APP_ASSEMBLY_VERSION
+          -o publish/win-x64
+
+      - name: Package Portable Archive and Generate SHA-256 Checksums
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path dist-release | Out-Null
+          Compress-Archive -Path publish/win-x64/* -DestinationPath dist-release/Bitshift-win-x64-portable.zip -Force
+          $hashZip = (Get-FileHash dist-release/Bitshift-win-x64-portable.zip -Algorithm SHA256).Hash
+          $hashExe = (Get-FileHash publish/win-x64/Bitshift.exe -Algorithm SHA256).Hash
+          @(
+            "$hashZip  Bitshift-win-x64-portable.zip",
+            "$hashExe  Bitshift.exe"
+          ) | Out-File -FilePath dist-release/SHA256SUMS.txt -Encoding utf8
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: Bitshift-win-x64
+          path: |
+            dist-release/Bitshift-win-x64-portable.zip
+            dist-release/SHA256SUMS.txt
+          if-no-files-found: error
+
+  release:
+    name: Publish GitHub Release
+    needs: build-windows
+    if: github.event_name == 'push' && needs.build-windows.outputs.is_release == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: Bitshift-win-x64
+          path: dist-release
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@8a0cd651e5b2365bd640854a3fa5dfc70e4875f3 # v3.0.4
+        with:
+          files: |
+            dist-release/Bitshift-win-x64-portable.zip
+            dist-release/SHA256SUMS.txt
+          generate_release_notes: true
+          prerelease: ${{ contains(github.ref_name, '-') }}
